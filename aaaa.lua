@@ -1,13 +1,13 @@
 
-g_Description = "[M] 35. 차원의 틈 높은확률 등장위치 %, %, %, %, % 와 챔피언 %명(기본0:Random)(0~1), 등장존 개수 % 세팅 (3~5), 차원의 틈 활성화 %"
+g_Description = "[M] 35. ������ ƴ ����Ȯ�� ������ġ %, %, %, %, % �� è�Ǿ� %��(�⺻0:Random)(0~1), ������ ���� % ���� (3~5), ������ ƴ Ȱ��ȭ %"
 g_ParamType = { "Value","Value","Value","Value","Value", "Integer", "Integer", "Value" }
 
 function Action( Zone_1,Zone_2,Zone_3,Zone_4,Zone_5,ChampNumSelect, ZoneNum, ArkChamp )
 
-	ActorHandle = api_trigger_GetPartyActor(g_room,1);  -- 삭제 예정
+	ActorHandle = api_trigger_GetPartyActor(g_room,1);  -- ���� ����
 	
 	
-	local Start = api_trigger_GetRandomRange(g_room,1,1000,4015);
+	local Start = api_trigger_GetRandomRange(g_room,1,1000);
     local ChampPossibility = api_trigger_TriggerVariableTable( g_room, 4015 )
     local ArkPossibility = api_trigger_TriggerVariableTable( g_room, 4016 )
 	local RandomZoneNum1 = 0
@@ -15,7 +15,7 @@ function Action( Zone_1,Zone_2,Zone_3,Zone_4,Zone_5,ChampNumSelect, ZoneNum, Ark
 	local RandomZoneNum3 = 0
 	local ChampNumSelectZone = ChampNumSelect
 	local ChampNum = nil
-    local Arkset = api_trigger_GetRandomRange(g_room,1,100,4016); -- 차원의 틈 활성화 확률
+    local Arkset = api_trigger_GetRandomRange(g_room,1,100); -- ������ ƴ Ȱ��ȭ Ȯ��
 	local dimension = 0
     
     if ZoneNum < 3 then
@@ -27,164 +27,163 @@ function Action( Zone_1,Zone_2,Zone_3,Zone_4,Zone_5,ChampNumSelect, ZoneNum, Ark
     Count = api_trigger_GetPartyCount(g_room);
 	for i = 1, Count do 
 	  ActorHandle = api_trigger_GetPartyActor(g_room,i);  
-	  api_log_UserLog(g_room, ActorHandle, "차원의 틈 세팅-높은확률 - 37.5 퍼센트"); -- 삭제 예정
+	  api_log_UserLog(g_room, ActorHandle, "������ ƴ ����-����Ȯ�� - 37.5 �ۼ�Ʈ"); -- ���� ����
 	end
 	
-	ActorHandle = api_trigger_GetPartyActor(g_room,1);  -- 삭제 예정
+	ActorHandle = api_trigger_GetPartyActor(g_room,1);  -- ���� ����
 	
-	api_log_UserLog(g_room, ActorHandle, Start );-- 삭제 예정
+	api_log_UserLog(g_room, ActorHandle, Start );-- ���� ����
 	
 	if api_trigger_CheckDolisEvent(g_room, 1, 1 ) == true then
 		do
-		api_log_UserLog(g_room, ActorHandle, "도리스 활성 확인: 안식처 300%확률"); -- 도리스 이벤트 1-1 활성 시, 100%로 침략자 등장
+		api_log_UserLog(g_room, ActorHandle, "������ Ȱ�� Ȯ��: �Ƚ�ó 300%Ȯ��"); -- ������ �̺�Ʈ 1-1 Ȱ�� ��, 100%�� ħ���� ����
 		end		
 	end
 	
 	if api_trigger_CheckDolisEvent(g_room, 1, 2 ) == true then
 		do
-		api_log_UserLog(g_room, ActorHandle, "도리스 활성 확인: 안식처 500%확률"); -- 도리스 이벤트 1-1 활성 시, 100%로 침략자 등장
+		api_log_UserLog(g_room, ActorHandle, "������ Ȱ�� Ȯ��: �Ƚ�ó 500%Ȯ��"); -- ������ �̺�Ʈ 1-1 Ȱ�� ��, 100%�� ħ���� ����
 		end		
 	end
 	
 	if api_trigger_CheckDolisEvent(g_room, 1, 3 ) == true then
 		do
-		api_log_UserLog(g_room, ActorHandle, "도리스 활성 확인: 안식처 1000%확률"); -- 도리스 이벤트 1-1 활성 시, 100%로 침략자 등장
+		api_log_UserLog(g_room, ActorHandle, "������ Ȱ�� Ȯ��: �Ƚ�ó 1000%Ȯ��"); -- ������ �̺�Ʈ 1-1 Ȱ�� ��, 100%�� ħ���� ����
 		end		
 	end
     
     if Start <= ChampPossibility then
 
-        api_log_UserLog(g_room, ActorHandle, "차원의 틈 활성?");-- 삭제 예정
+        api_log_UserLog(g_room, ActorHandle, "������ ƴ Ȱ��?");-- ���� ����
         floorCheck = api_trigger_GetStageExDifficultLevel( g_room )	
         partyLevelCount = 0;
     
         for i = 1, Count do
             ActorHandle = api_trigger_GetPartyActor(g_room,i);  
-            if api_trigger_GetUserLevelByTrigger(g_room,ActorHandle) >= 99 then -- 파티원 한명씩 99 이상일때를 체크
-                partyLevelCount = partyLevelCount + 1; -- 99 이상일때 숫자 1씩 올림
+            if api_trigger_GetUserLevelByTrigger(g_room,ActorHandle) >= 99 then -- ��Ƽ�� �Ѹ��� 99 �̻��϶��� üũ
+                partyLevelCount = partyLevelCount + 1; -- 99 �̻��϶� ���� 1�� �ø�
             end
-            api_log_UserLog(g_room, ActorHandle, "레벨 체크완료");
-            api_log_UserLog(g_room, ActorHandle, Arkset );-- 삭제 예정
+            api_log_UserLog(g_room, ActorHandle, "���� üũ�Ϸ�");
+            api_log_UserLog(g_room, ActorHandle, Arkset );-- ���� ����
         end
     
-        if partyLevelCount == Count then -- 만렙 파티원 수와 입장한 사람들 수가 동일한지 체크 == 만렙 조건 확인
-            if floorCheck >= 19 then -- 15층 이상일때 = 층 조건 확인
-                if Arkset <= ArkPossibility then -- 차원의 틈 활성화
-                    api_log_UserLog(g_room, ActorHandle, "활성,로그보냄");
+        if partyLevelCount == Count then -- ���� ��Ƽ�� ���� ������ ����� ���� �������� üũ == ���� ���� Ȯ��
+            if floorCheck >= 19 then -- 15�� �̻��϶� = �� ���� Ȯ��
+                if Arkset <= ArkPossibility then -- ������ ƴ Ȱ��ȭ
+                    api_log_UserLog(g_room, ActorHandle, "Ȱ��,�α׺���");
                     g_value[ArkChamp] = 1;
                     dimension = 1;
                     Count = api_trigger_GetPartyCount(g_room)
                     for i = 1, Count do 
                         ActorHandle = api_trigger_GetPartyActor(g_room,i)
-                        api_trigger_ActivateMission(g_room, ActorHandle, 6293)
-                        api_trigger_AddCharacterActionOtherLog(g_room,ActorHandle,10000,0,0,0,0,0,0)			
+                        api_trigger_ActivateMission(g_room, ActorHandle, 6293)		
                     end
                 elseif Arkset > ArkPossibility then
-                    api_log_UserLog(g_room, ActorHandle, "비활성"); -- 차원의 틈 비활성화
+                    api_log_UserLog(g_room, ActorHandle, "��Ȱ��"); -- ������ ƴ ��Ȱ��ȭ
                 end
             else
-                api_log_UserLog(g_room, ActorHandle, "라비린스 조건 미충족"); -- 차원의 틈 비활성화
+                api_log_UserLog(g_room, ActorHandle, "��񸰽� ���� ������"); -- ������ ƴ ��Ȱ��ȭ
             end
         else
-            api_log_UserLog(g_room, ActorHandle, "레벨 조건 미충족"); -- 차원의 틈 비활성화
+            api_log_UserLog(g_room, ActorHandle, "���� ���� ������"); -- ������ ƴ ��Ȱ��ȭ
         end    
         
 		
-		if dimension == 1 then -- 차원의 틈 전용 침략자 등장 세팅
-            api_log_UserLog(g_room, ActorHandle, "차원의 틈 로직")
+		if dimension == 1 then -- ������ ƴ ���� ħ���� ���� ����
+            api_log_UserLog(g_room, ActorHandle, "������ ƴ ����")
         
-		-- 0일땐 1~3마리 랜덤하게, 1일땐 한마리 확정, 2일땐 1~2마리 확정, 3일땐 3마리 확정
+		-- 0�϶� 1~3���� �����ϰ�, 1�϶� �Ѹ��� Ȯ��, 2�϶� 1~2���� Ȯ��, 3�϶� 3���� Ȯ��
 			if ChampNumSelectZone == 0 then
 				ChampNum = api_trigger_GetRandomRange(g_room,1,100);
-				api_log_UserLog(g_room, ActorHandle, "침략자_0_1~2마리 랜덤");-- 삭제 예정
+				api_log_UserLog(g_room, ActorHandle, "ħ����_0_1~2���� ����");-- ���� ����
 			end	
 
 			if ChampNumSelectZone == 1 then
 				ChampNum = api_trigger_GetRandomRange(g_room,1,100);
-				api_log_UserLog(g_room, ActorHandle, "챔피언_1_1마리 확정");-- 삭제 예정
+				api_log_UserLog(g_room, ActorHandle, "è�Ǿ�_1_1���� Ȯ��");-- ���� ����
 			end
             
             if ChampNumSelectZone == 11  then
 				soloBossChcek = api_trigger_GetRandomRange(g_room,1, 100);
-				api_log_UserLog(g_room, ActorHandle, soloBossChcek);-- 삭제 예정
+				api_log_UserLog(g_room, ActorHandle, soloBossChcek);-- ���� ����
 				if soloBossChcek <= 50 then
 					ChampNum = api_trigger_GetRandomRange(g_room, 1, 90 );
-					api_log_UserLog(g_room, ActorHandle, "3개이상 맵으로 구성된 스테이지시 중간 지역 전용");-- 삭제 예정
+					api_log_UserLog(g_room, ActorHandle, "3���̻� ������ ������ ���������� �߰� ���� ����");-- ���� ����
 				end
 			end
 		
             
 		else
-            api_log_UserLog(g_room, ActorHandle, "일반 침략자 로직")
+            api_log_UserLog(g_room, ActorHandle, "�Ϲ� ħ���� ����")
 			if ChampNumSelectZone == 0 then
 				ChampNum = api_trigger_GetRandomRange(g_room,1,100);
-				api_log_UserLog(g_room, ActorHandle, "챔피언test_0_1~2마리 랜덤");-- 삭제 예정
+				api_log_UserLog(g_room, ActorHandle, "è�Ǿ�test_0_1~2���� ����");-- ���� ����
 			end	
 
 			if ChampNumSelectZone == 1 then
 				ChampNum = api_trigger_GetRandomRange(g_room,1,100);
-				api_log_UserLog(g_room, ActorHandle, "챔피언test_1_1~2마리 랜덤");-- 삭제 예정
+				api_log_UserLog(g_room, ActorHandle, "è�Ǿ�test_1_1~2���� ����");-- ���� ����
 			end
             
             if ChampNumSelectZone == 11  then
 				soloBossChcek = api_trigger_GetRandomRange(g_room,1, 100);
-				api_log_UserLog(g_room, ActorHandle, soloBossChcek);-- 삭제 예정
+				api_log_UserLog(g_room, ActorHandle, soloBossChcek);-- ���� ����
 				if soloBossChcek <= 50 then
 					ChampNum = api_trigger_GetRandomRange(g_room, 1, 90 );
-					api_log_UserLog(g_room, ActorHandle, "3개이상 맵으로 구성된 스테이지시 중간 지역 전용");-- 삭제 예정
+					api_log_UserLog(g_room, ActorHandle, "3���̻� ������ ������ ���������� �߰� ���� ����");-- ���� ����
 				end
 			end
 
 		end
 		
-		-- 챔피언 마리수 확정 이후 등장 위치 설정 로직, 1마리 80퍼, 2마리 15퍼, 3마리 5퍼
+		-- è�Ǿ� ������ Ȯ�� ���� ���� ��ġ ���� ����, 1���� 80��, 2���� 15��, 3���� 5��
 		if ChampNum <= 90 then
-			RandomZoneNum1 = api_trigger_GetRandomRange(g_room,1,ZoneNum,4013);
-			api_log_UserLog(g_room, ActorHandle, "챔피언한마리");-- 삭제 예정
+			RandomZoneNum1 = api_trigger_GetRandomRange(g_room,1,ZoneNum);
+			api_log_UserLog(g_room, ActorHandle, "è�Ǿ��Ѹ���");-- ���� ����
 			
 		elseif ChampNum > 90 and ChampNum <= 100 then
-			RandomZoneNum1 = api_trigger_GetRandomRange(g_room,1,ZoneNum,4013);
-			RandomZoneNum2 = api_trigger_GetRandomRange(g_room,1,ZoneNum,4013);
+			RandomZoneNum1 = api_trigger_GetRandomRange(g_room,1,ZoneNum);
+			RandomZoneNum2 = api_trigger_GetRandomRange(g_room,1,ZoneNum);
 			while RandomZoneNum1 == RandomZoneNum2 do
 				RandomZoneNum2 = api_trigger_GetRandomRange(g_room,1,ZoneNum);
 			end
-			api_log_UserLog(g_room, ActorHandle, "챔피언두마리");-- 삭제 예정
+			api_log_UserLog(g_room, ActorHandle, "è�Ǿ�θ���");-- ���� ����
 		end
 	end
 	
-	-- 위치 변수 변경
+	-- ��ġ ���� ����
 	if RandomZoneNum1 == 1 then
 		g_value[Zone_1] = g_value[Zone_1] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "1존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "1��");-- ���� ����
 	elseif RandomZoneNum1 == 2 then
 		g_value[Zone_2] = g_value[Zone_2] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "2존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "2��");-- ���� ����
 	elseif RandomZoneNum1 == 3 then
 		g_value[Zone_3] = g_value[Zone_3] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "3존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "3��");-- ���� ����
 	elseif RandomZoneNum1 == 4 then
 		g_value[Zone_4] = g_value[Zone_4] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "4존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "4��");-- ���� ����
 	elseif RandomZoneNum1 == 5 then
 		g_value[Zone_5] = g_value[Zone_5] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "5존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "5��");-- ���� ����
 	end
 	
 	if RandomZoneNum2 == 1 then
 		g_value[Zone_1] = g_value[Zone_1] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "1존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "1��");-- ���� ����
 	elseif RandomZoneNum2 == 2 then
 		g_value[Zone_2] = g_value[Zone_2] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "2존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "2��");-- ���� ����
 	elseif RandomZoneNum2 == 3 then
 		g_value[Zone_3] = g_value[Zone_3] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "3존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "3��");-- ���� ����
 	elseif RandomZoneNum2 == 4 then
 		g_value[Zone_4] = g_value[Zone_4] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "4존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "4��");-- ���� ����
 	elseif RandomZoneNum2 == 5 then
 		g_value[Zone_5] = g_value[Zone_5] + 9999;
-		api_log_UserLog(g_room, ActorHandle, "5존");-- 삭제 예정
+		api_log_UserLog(g_room, ActorHandle, "5��");-- ���� ����
 	end
 
 
